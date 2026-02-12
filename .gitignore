@@ -17,4 +17,3 @@ build/
 .vscode/
 *.log
 model.pth
-.claude/
