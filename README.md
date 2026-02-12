@@ -43,23 +43,23 @@ The agent controls multiple cars (200 in parallel) equipped with **9 LiDAR senso
 
 The foundation of Q-learning is the Bellman equation, defining the optimal action-value function:
 
-$$Q^{*}(s, a) = \mathbb{E}\left[r + \gamma \cdot \max_{a'} Q^{*}(s', a') \mid s, a\right]$$
+$$Q^{\ast}(s, a) = \mathbb{E}\left[r + \gamma \cdot \max_{a'} Q^{\ast}(s', a') \mid s, a\right]$$
 
 | Symbol | Description |
 |--------|-------------|
-| $Q^{*}(s, a)$ | Optimal expected cumulative reward for action $a$ in state $s$ |
+| $Q^{\ast}(s, a)$ | Optimal expected cumulative reward for action $a$ in state $s$ |
 | $r$ | Immediate reward |
 | $\gamma$ | Discount factor (0.99) |
 | $s'$ | Next state |
-| $\max_{a'} Q^{*}(s', a')$ | Best achievable value from next state |
+| $\max_{a'} Q^{\ast}(s', a')$ | Best achievable value from next state |
 
 ### Double DQN
 
 Standard DQN overestimates Q-values because the same network selects and evaluates actions. Double DQN decouples these:
 
-$$a^{*} = \arg\max_{a} Q_{\theta}(s', a)$$
+$$a^{\ast} = \arg\max_{a} Q_{\theta}(s', a)$$
 
-$$y = r + \gamma \cdot Q_{\theta^{-}}(s', a^{*})$$
+$$y = r + \gamma \cdot Q_{\theta^{-}}(s', a^{\ast})$$
 
 Where $\theta$ is the policy network and $\theta^{-}$ is the target network.
 
