@@ -43,25 +43,25 @@ The agent controls multiple cars (200 in parallel) equipped with **9 LiDAR senso
 
 The foundation of Q-learning is the Bellman equation, defining the optimal action-value function:
 
-$$Q^*(s, a) = \mathbb{E}\left[r + \gamma \cdot \max_{a'} Q^*(s', a') \mid s, a\right]$$
+$$Q^{*}(s, a) = \mathbb{E}\left[r + \gamma \cdot \max_{a'} Q^{*}(s', a') \mid s, a\right]$$
 
 | Symbol | Description |
 |--------|-------------|
-| $Q^*(s, a)$ | Optimal expected cumulative reward for action $a$ in state $s$ |
+| $Q^{*}(s, a)$ | Optimal expected cumulative reward for action $a$ in state $s$ |
 | $r$ | Immediate reward |
 | $\gamma$ | Discount factor (0.99) |
 | $s'$ | Next state |
-| $\max_{a'} Q^*(s', a')$ | Best achievable value from next state |
+| $\max_{a'} Q^{*}(s', a')$ | Best achievable value from next state |
 
 ### Double DQN
 
 Standard DQN overestimates Q-values because the same network selects and evaluates actions. Double DQN decouples these:
 
-$$a^* = \arg\max_a Q_{\theta}(s', a)$$
+$$a^{*} = \arg\max_{a} Q_{\theta}(s', a)$$
 
-$$y = r + \gamma \cdot Q_{\theta^-}(s', a^*)$$
+$$y = r + \gamma \cdot Q_{\theta^{-}}(s', a^{*})$$
 
-Where $\theta$ is the policy network and $\theta^-$ is the target network.
+Where $\theta$ is the policy network and $\theta^{-}$ is the target network.
 
 ### Dueling Architecture
 
@@ -78,11 +78,11 @@ $$Q(s, a) = V(s) + \left(A(s, a) - \frac{1}{|\mathcal{A}|}\sum_{a'} A(s, a')\rig
 
 Instead of uniform random sampling, transitions with higher TD-error are sampled more frequently:
 
-$$P(i) = \frac{p_i^\alpha}{\sum_k p_k^\alpha}, \quad p_i = |\delta_i| + \epsilon$$
+$$P(i) = \frac{p_{i}^{\alpha}}{\sum_{k} p_{k}^{\alpha}}, \quad p_{i} = |\delta_{i}| + \epsilon$$
 
-Where $\delta_i$ is the TD-error. Importance-sampling weights correct the bias:
+Where $\delta_{i}$ is the TD-error. Importance-sampling weights correct the bias:
 
-$$w_i = \left(\frac{1}{N \cdot P(i)}\right)^\beta$$
+$$w_{i} = \left(\frac{1}{N \cdot P(i)}\right)^{\beta}$$
 
 $\beta$ anneals from 0.4 to 1.0 during training.
 
@@ -90,7 +90,7 @@ $\beta$ anneals from 0.4 to 1.0 during training.
 
 Instead of periodic hard copies, the target network is updated every training step:
 
-$$\theta^- \leftarrow \tau \cdot \theta + (1 - \tau) \cdot \theta^-$$
+$$\theta^{-} \leftarrow \tau \cdot \theta + (1 - \tau) \cdot \theta^{-}$$
 
 With $\tau = 0.005$, providing smooth, stable learning.
 
@@ -98,9 +98,9 @@ With $\tau = 0.005$, providing smooth, stable learning.
 
 Weighted Huber (Smooth L1) loss with PER importance-sampling:
 
-$$\mathcal{L} = \frac{1}{N}\sum_{i=1}^{N} w_i \cdot \text{SmoothL1}\left(Q_\theta(s_i, a_i) - y_i\right)$$
+$$\mathcal{L} = \frac{1}{N}\sum_{i=1}^{N} w_{i} \cdot \text{SmoothL1}\left(Q_{\theta}(s_{i}, a_{i}) - y_{i}\right)$$
 
-Gradients are clipped: $\|\nabla\|_{\max} = 1.0$
+Gradients are clipped: $\lVert\nabla\rVert_{\max} = 1.0$
 
 ---
 
@@ -252,3 +252,7 @@ python main.py --mode eval
 ## License
 
 This project is for educational and research purposes.
+
+---
+
+<p align="center">Made with ❤️ by uzbtrust</p>
