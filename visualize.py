@@ -418,14 +418,17 @@ def main():
 
     cars = []
     cp0 = track.checkpoints[0]
-    sx = (cp0[0][0] + cp0[1][0]) / 2
-    sy = (cp0[0][1] + cp0[1][1]) / 2
+    ox, oy = cp0[0]
+    ix, iy = cp0[1]
     cp1 = track.checkpoints[1]
-    nx = (cp1[0][0] + cp1[1][0]) / 2
-    ny = (cp1[0][1] + cp1[1][1]) / 2
-    sa = math.degrees(math.atan2(-(ny - sy), nx - sx))
+    tx = (cp1[0][0] + cp1[1][0]) / 2
+    ty = (cp1[0][1] + cp1[1][1]) / 2
     for i in range(NUM_CARS):
-        cars.append(Car(sx, sy, sa, i, 1))
+        t = (i + 1) / (NUM_CARS + 1)
+        x = ox + t * (ix - ox)
+        y = oy + t * (iy - oy)
+        ang = math.degrees(math.atan2(-(ty - y), tx - x))
+        cars.append(Car(x, y, ang, i, 1))
 
     car_rewards = [0.0] * NUM_CARS
     car_done = [False] * NUM_CARS
