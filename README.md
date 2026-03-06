@@ -4,6 +4,8 @@ A reinforcement learning project that trains autonomous racing cars to navigate 
 
 ![Demo](Demo.png)
 
+![Training Curves](training_curves.png)
+
 ---
 
 ## Table of Contents

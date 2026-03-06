@@ -17,6 +17,5 @@ build/
 .vscode/
 *.log
 model.pth
-training_curves.png
 .ipynb_checkpoints/
 .claude/
